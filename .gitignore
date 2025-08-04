@@ -151,4 +151,4 @@ tmp/
 # *.pdf
 
 # Azure credentials (if any)
-azure_credentials.json 
+azure_credentials.json

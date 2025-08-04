@@ -54,13 +54,7 @@ streamlit run streamlit_app.py
 
 2. **Open your browser** and go to `http://localhost:8501`
 
-3. **Upload a PDF contract** and click "Start Analysis"
-
-4. **Choose analysis type**:
-   - **Full Team Analysis**: Complete analysis from all agents
-   - **Structure Only**: Document structure analysis
-   - **Legal Only**: Legal compliance assessment
-   - **Negotiation Only**: Negotiation strategy analysis
+3. **Upload a PDF contract** and click "Analyze Contract"
 
 ### Command Line Usage
 
@@ -69,29 +63,6 @@ from ai_legal_agent import analyze_contract
 
 # Analyze a contract comprehensively
 analyze_contract("ServicesAgreementSample.pdf")
-```
-
-### Individual Agent Usage
-
-```python
-from ai_legal_agent import (
-    contract_structure_agent,
-    legal_framework_agent,
-    negotiating_agent
-)
-
-# Use individual agents for specific analysis
-structure_analysis = contract_structure_agent.print_response(
-    "Analyze the contract structure and organization"
-)
-
-legal_analysis = legal_framework_agent.print_response(
-    "Assess legal compliance and regulatory requirements"
-)
-
-negotiation_analysis = negotiating_agent.print_response(
-    "Provide negotiation strategy and recommendations"
-)
 ```
 
 ### Running the Demo
@@ -160,47 +131,13 @@ python ai_legal_agent.py
 - Automatic text extraction with page numbering
 - Content preview before analysis
 
-### 🤖 Analysis Options
+### 🤖 Analysis
 - **Full Team Analysis**: Complete coordinated analysis
-- **Individual Agent Analysis**: Focus on specific aspects
 - **Real-time Progress**: Spinner indicators during processing
 
 ### 📊 Results Display
-- **Summary Tab**: Executive summary and key findings
-- **Details Tab**: Comprehensive analysis results
-- **Raw Output Tab**: Markdown-formatted complete output
-
-### 📈 Statistics
-- File size and page count
-- Character count and processing metrics
-- Analysis type and agent information
-
-## PDF Processing
-
-The system uses PyPDF2 for efficient document reading:
-
-- **Input**: PDF files (local or uploaded)
-- **Processing**: Direct text extraction with page numbering
-- **Output**: Structured text content for agent analysis
-- **Error Handling**: Graceful handling of PDF reading errors
-
-## Output Format
-
-The system provides structured analysis including:
-
-- **Executive Summary**: Key findings and recommendations
-- **Structural Analysis**: Document organization and components
-- **Legal Assessment**: Compliance status and risk analysis
-- **Negotiation Strategy**: Strategic recommendations and opportunities
-- **Action Items**: Specific next steps and recommendations
-
-## Configuration
-
-The system automatically configures:
-- Azure OpenAI model
-- PDF reading capabilities
-- Multi-agent team coordination
-- Streamlit web interface
+- Clean, formatted analysis results
+- Comprehensive legal insights
 
 ## Dependencies
 
@@ -224,4 +161,4 @@ This project is licensed under the MIT License.
 
 ## Support
 
-For questions or issues, please open an issue in the repository or contact the development team. 
+For questions or issues, please open an issue in the repository or contact the development team.
