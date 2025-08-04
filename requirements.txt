@@ -1,0 +1,7 @@
+agno
+azure-identity
+python-dotenv
+pypdf2
+pydantic
+typing-extensions
+streamlit 
