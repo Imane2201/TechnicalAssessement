@@ -9,15 +9,14 @@ This system consists of 3 specialized AI agents working together to analyze lega
 1. **Contract Structure Agent** - Analyzes document structure and key components
 2. **Legal Framework Agent** - Assesses legal compliance and regulatory requirements  
 3. **Negotiating Agent** - Provides strategic negotiation advice and opportunities
-4. **Manager Agent** - Coordinates and consolidates inputs from the 3 agents
+4. **Team Coordinator** - Combines and synthesizes inputs from all agents
 
 ## Features
 
 - **Multi-Agent Architecture**: 3 specialized agents with distinct roles and expertise
 - **Direct PDF Processing**: PyPDF2 integration for efficient document reading
-- **Web UI**: Streamlit interface for easy PDF upload and analysis
+- **Minimalist Web UI**: Clean Streamlit interface for easy PDF upload and analysis
 - **Comprehensive Analysis**: Structure, legal framework, and negotiation strategy
-- **Traceable Results**: All agent inputs and recommendations are tracked
 - **Azure OpenAI Integration**: Powered by Azure OpenAI services
 - **Professional Legal Analysis**: Industry-standard legal terminology and frameworks
 
@@ -25,8 +24,8 @@ This system consists of 3 specialized AI agents working together to analyze lega
 
 1. **Clone the repository**:
 ```bash
-git clone <repository-url>
-cd TalentPerformerTechAss
+git clone https://github.com/Imane2201/TechnicalAssessement.git
+cd TechnicalAssessement
 ```
 
 2. **Install dependencies**:
@@ -88,7 +87,7 @@ python ai_legal_agent.py
 - **Expertise**: Commercial negotiations, deal structuring, risk allocation
 - **Output**: Negotiation strategies, leverage points, term improvements
 
-### 4. Manager Agent (Team Coordinator)
+### 4. Team Coordinator
 - **Role**: Coordinates and consolidates inputs from the 3 agents
 - **Expertise**: Project management, legal consulting, executive communication
 - **Output**: Comprehensive reports, executive summaries, action items
@@ -111,7 +110,7 @@ python ai_legal_agent.py
 │  └─────────────┘ └─────────────┘ └─────────────┘               │
 │                                                                 │
 │  ┌─────────────────────────────────────────────────────────────┐ │
-│  │              Manager Agent (Coordinator)                    │ │
+│  │              Team Coordinator                               │ │
 │  └─────────────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────┘
                                 │
@@ -127,17 +126,36 @@ python ai_legal_agent.py
 ## Web Interface Features
 
 ### 📄 PDF Upload
-- Drag and drop or click to upload PDF files
+- Simple drag and drop or click to upload PDF files
 - Automatic text extraction with page numbering
-- Content preview before analysis
+- Clean success/error messaging
 
 ### 🤖 Analysis
-- **Full Team Analysis**: Complete coordinated analysis
+- **Single Analysis Type**: Complete coordinated analysis from all agents
 - **Real-time Progress**: Spinner indicators during processing
+- **Clean Output**: Formatted results without terminal artifacts
 
 ### 📊 Results Display
 - Clean, formatted analysis results
 - Comprehensive legal insights
+- Direct display without tabs or complex UI
+
+## Technical Implementation
+
+### PDF Processing
+- Uses PyPDF2 for text extraction
+- Handles temporary file management
+- Provides page-by-page content with numbering
+
+### Response Handling
+- Captures AI responses without ANSI escape codes
+- Cleans terminal formatting for web display
+- Provides error handling and user feedback
+
+### Agent Coordination
+- Uses AGNO framework for multi-agent orchestration
+- Coordinates specialized agents with shared PDF access
+- Synthesizes comprehensive analysis results
 
 ## Dependencies
 
