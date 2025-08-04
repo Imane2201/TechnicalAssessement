@@ -55,6 +55,9 @@ def analyze_contract_with_team(pdf_content):
     """Run the legal contracts team analysis"""
     try:
         print("Creating AI agents...")
+        print(f"PDF content length: {len(pdf_content)} characters")
+        print(f"PDF content preview: {pdf_content[:200]}...")
+        
         # Create agents with PDF content
         contract_structure_agent, legal_framework_agent, negotiating_agent, legal_contracts_team = create_agents_with_pdf(pdf_content)
         
@@ -62,10 +65,26 @@ def analyze_contract_with_team(pdf_content):
         # Run the team analysis and get response directly
         with st.spinner("Analyzing contract..."):
             response = legal_contracts_team.run(
-                "Please provide a comprehensive analysis of the contract. Include structural analysis, legal compliance assessment, and negotiation opportunities. Provide specific recommendations and action items."
+                f"""Please analyze the uploaded contract comprehensively. 
+
+IMPORTANT: You MUST use the read_pdf_content tool to access the contract text before providing any analysis.
+
+After reading the contract, provide a comprehensive analysis including:
+
+1. **Executive Summary**: Contract type, key parties, overall assessment
+2. **Structural Analysis**: Document organization, missing sections, recommendations
+3. **Legal Risk Assessment**: Key legal issues with specific quotes from the contract
+4. **Negotiation Strategy**: High-priority negotiation points with specific clauses
+5. **Action Items**: Specific recommendations and next steps
+
+Ensure all analysis is based on actual contract content with specific quotes and references."""
             )
         
         print("Analysis completed!")
+        print(f"Response type: {type(response)}")
+        if hasattr(response, 'content'):
+            print(f"Response content length: {len(response.content)}")
+            print(f"Response preview: {response.content[:200]}...")
         
         # Clean the response and display it
         if response and hasattr(response, 'content'):

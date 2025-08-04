@@ -90,10 +90,10 @@ def create_agents_with_pdf(pdf_content: str):
         model=get_azure_model(),
         tools=[ReasoningTools(), read_pdf_content],
         markdown=True,
-        instructions=dedent("""
+        instructions=dedent(f"""
         You are a Contract Structuring Expert specializing in document organization and clarity.
         
-        Use the read_pdf_content tool to access the contract text.
+        IMPORTANT: You MUST use the read_pdf_content tool to access the contract text before providing any analysis.
         
         Your analysis should focus on:
         1. **Document Organization**: Identify main sections, subsections, and their logical flow
@@ -108,6 +108,8 @@ def create_agents_with_pdf(pdf_content: str):
         - **Recommendations**: Suggest specific structural improvements
         
         Focus on structure and organization only - avoid legal interpretation.
+        
+        First, use the read_pdf_content tool to access the contract, then provide your analysis.
         """),
         show_tool_calls=False
     )
@@ -119,10 +121,10 @@ def create_agents_with_pdf(pdf_content: str):
         model=get_azure_model(),
         tools=[ReasoningTools(), read_pdf_content],
         markdown=True,
-        instructions=dedent("""
+        instructions=dedent(f"""
         You are a Legal Compliance Analyst focused on identifying legal risks and compliance issues.
         
-        Use the read_pdf_content tool to access the contract text.
+        IMPORTANT: You MUST use the read_pdf_content tool to access the contract text before providing any analysis.
         
         For each legal observation, you MUST:
         1. **Quote the exact text** from the contract that supports your analysis
@@ -143,6 +145,8 @@ def create_agents_with_pdf(pdf_content: str):
         - **Key Legal Issues**: [List with quotes and explanations]
         - **Compliance Concerns**: [Regulatory or industry-specific issues]
         - **Risk Assessment**: [Overall legal risk level and key concerns]
+        
+        First, use the read_pdf_content tool to access the contract, then provide your analysis.
         """),
         show_tool_calls=False
     )
@@ -154,10 +158,10 @@ def create_agents_with_pdf(pdf_content: str):
         model=get_azure_model(),
         tools=[ReasoningTools(), read_pdf_content],
         markdown=True,
-        instructions=dedent("""
+        instructions=dedent(f"""
         You are a Contract Negotiation Strategist specializing in identifying negotiation opportunities and strategic improvements.
         
-        Use the read_pdf_content tool to access the contract text.
+        IMPORTANT: You MUST use the read_pdf_content tool to access the contract text before providing any analysis.
         
         For each negotiation point, provide:
         1. **Exact Quote**: The specific clause or term from the contract
@@ -179,6 +183,8 @@ def create_agents_with_pdf(pdf_content: str):
         - **Medium-Priority Points**: [Secondary negotiation opportunities]
         - **Strategic Recommendations**: [Overall negotiation approach]
         - **Leverage Assessment**: [Which party has more bargaining power and why]
+        
+        First, use the read_pdf_content tool to access the contract, then provide your analysis.
         """),
         show_tool_calls=False
     )
@@ -197,21 +203,48 @@ def create_agents_with_pdf(pdf_content: str):
         markdown=True,
         description="A coordinated team of legal contract experts that provides comprehensive contract analysis",
         success_criteria=dedent("""
-        A well-organized and traceable summary of the contract that includes:
-        - Legal context highlighting potential legal issues with quoted contract text as evidence
-        - Structural review with clarity and formatting suggestions
-        - Negotiation strategies directly tied to specific paragraphs or clauses
+        A comprehensive analysis that includes:
+        - Executive summary with key findings
+        - Structural analysis with specific recommendations
+        - Legal risk assessment with quoted evidence
+        - Negotiation strategy with prioritized opportunities
+        - Actionable recommendations for next steps
         """),
         instructions=dedent("""
-        You are the lead summarizer. You must combine input from:
-        1. Legal Agent
-        2. Structure Agent
-        3. Negotiation Agent
+        You are the lead coordinator for a legal contract analysis team. Your role is to:
         
-        Synthesize all team member outputs into a cohesive, comprehensive response.
-        Ensure the final response is well-structured and addresses all aspects of the contract.
-        Coordinate the team to avoid redundancy while ensuring complete coverage of the analysis.
-        Provide executive summary with key findings and actionable recommendations.
+        1. **Coordinate the Analysis**: Ensure each team member (Structure, Legal, and Negotiation agents) provides their specialized analysis
+        2. **Synthesize Results**: Combine all inputs into a comprehensive, well-organized report
+        3. **Provide Executive Summary**: Create a clear overview of key findings and recommendations
+        
+        Your final report should include:
+        
+        ## Executive Summary
+        - Contract type and key parties
+        - Overall risk assessment
+        - Critical findings and recommendations
+        
+        ## Structural Analysis
+        - Document organization assessment
+        - Missing or problematic sections
+        - Structural improvement recommendations
+        
+        ## Legal Risk Assessment
+        - Key legal issues with specific quotes
+        - Compliance concerns
+        - Risk level and mitigation strategies
+        
+        ## Negotiation Strategy
+        - High-priority negotiation points
+        - Strategic recommendations
+        - Leverage assessment for each party
+        
+        ## Action Items
+        - Specific next steps
+        - Priority recommendations
+        - Timeline for implementation
+        
+        Ensure all analysis is based on actual contract content with specific quotes and references.
         """),
         add_datetime_to_instructions=True,
         enable_agentic_context=True,
