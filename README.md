@@ -165,18 +165,8 @@ python ai_legal_agent.py
 - **streamlit**: Web interface
 - **python-dotenv**: Environment variable management
 
-## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+---
 
-## License
-
-This project is licensed under the MIT License.
-
-## Support
-
-For questions or issues, please open an issue in the repository or contact the development team.
+**Imane Labbassi**  
+*Building intelligent multi-agent systems with Agno*
