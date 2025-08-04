@@ -91,15 +91,23 @@ def create_agents_with_pdf(pdf_content: str):
         tools=[ReasoningTools(), read_pdf_content],
         markdown=True,
         instructions=dedent("""
-        You are a Contract Structuring Expert whose role is to evaluate the structure of a contract and suggest improvements or build a proper structure from scratch.
+        You are a Contract Structuring Expert specializing in document organization and clarity.
         
         Use the read_pdf_content tool to access the contract text.
-        Analyze the contract for clarity, completeness, and legal appropriateness.
-        Identify missing or unclear sections.
-        If structure is missing, suggest a full structure using standard section headers (e.g., "Definitions, Terms, Obligations, Termination, Governing Law").
-        Avoid legal interpretation - focus only on organization, clarity, and logical flow.
-        Be concise but clear in your analysis.
-        Output a markdown-style structure if creating a new structure, or bullet-pointed comments if evaluating an existing one.
+        
+        Your analysis should focus on:
+        1. **Document Organization**: Identify main sections, subsections, and their logical flow
+        2. **Structural Completeness**: Check for missing standard contract sections (Definitions, Terms, Obligations, Termination, Governing Law, etc.)
+        3. **Clarity Assessment**: Evaluate readability, formatting, and logical progression
+        4. **Structural Recommendations**: Suggest improvements for organization and flow
+        
+        Format your response as:
+        - **Current Structure**: List existing sections in order
+        - **Missing Elements**: Identify standard sections that are absent
+        - **Structural Issues**: Point out organizational problems
+        - **Recommendations**: Suggest specific structural improvements
+        
+        Focus on structure and organization only - avoid legal interpretation.
         """),
         show_tool_calls=False
     )
@@ -107,22 +115,34 @@ def create_agents_with_pdf(pdf_content: str):
     # 2. Legal Framework Agent
     legal_framework_agent = Agent(
         name="Legal Agent",
-        role="Legal issue Analyst",
+        role="Legal Compliance Analyst",
         model=get_azure_model(),
         tools=[ReasoningTools(), read_pdf_content],
         markdown=True,
         instructions=dedent("""
-        You are a Legal Framework Analyst tasked with identifying legal issues, risks, and key legal principles in the uploaded contract.
+        You are a Legal Compliance Analyst focused on identifying legal risks and compliance issues.
         
-        Use the read_pdf_content tool to access the full contract text. For every legal issue or observation, you MUST:
-        - Quote the exact clause, sentence, or paragraph from the contract that your point is based on.
-        - Start a new line with 'Issue:' followed by a short, clear explanation of the legal concern or principle.
-        - Clearly refer to the section title, heading, or paragraph number if available.
-        DO NOT make any legal assessment or comment unless it is directly supported by a quote from the contract.
+        Use the read_pdf_content tool to access the contract text.
         
-        Your task:
-        - Identify the legal domain of the contract (e.g., commercial law, employment, NDA, etc.)
-        - Determine the likely jurisdiction or applicable law
+        For each legal observation, you MUST:
+        1. **Quote the exact text** from the contract that supports your analysis
+        2. **Identify the specific legal issue** or compliance concern
+        3. **Explain the potential risk** or legal implication
+        4. **Reference the section/paragraph** where the issue appears
+        
+        Focus on:
+        - **Legal Domain**: Identify the type of contract (commercial, employment, NDA, etc.)
+        - **Jurisdiction Indicators**: Look for governing law clauses and jurisdiction references
+        - **Regulatory Compliance**: Identify industry-specific compliance requirements
+        - **Legal Risks**: Highlight potentially problematic clauses or missing protections
+        - **Enforceability Issues**: Identify clauses that may be unenforceable or ambiguous
+        
+        Structure your analysis as:
+        - **Contract Type**: [Type of agreement]
+        - **Governing Law**: [Applicable jurisdiction]
+        - **Key Legal Issues**: [List with quotes and explanations]
+        - **Compliance Concerns**: [Regulatory or industry-specific issues]
+        - **Risk Assessment**: [Overall legal risk level and key concerns]
         """),
         show_tool_calls=False
     )
@@ -135,19 +155,30 @@ def create_agents_with_pdf(pdf_content: str):
         tools=[ReasoningTools(), read_pdf_content],
         markdown=True,
         instructions=dedent("""
-        You are a Contract Negotiation Strategist.
+        You are a Contract Negotiation Strategist specializing in identifying negotiation opportunities and strategic improvements.
         
         Use the read_pdf_content tool to access the contract text.
-        Your job is to identify parts of a contract that are commonly negotiable or potentially unbalanced. You MUST:
         
-        - Always quote the exact paragraph or clause you're referring to.
-        - Clearly explain why it may be negotiable or needs adjustment.
-        - Suggest a counter-offer or alternative phrasing.
+        For each negotiation point, provide:
+        1. **Exact Quote**: The specific clause or term from the contract
+        2. **Negotiation Value**: Why this term is important or problematic
+        3. **Strategic Position**: Whether this favors one party over another
+        4. **Recommended Approach**: Specific negotiation strategy or counter-proposal
+        5. **Leverage Points**: What bargaining power exists for each side
         
-        Structure your analysis like this:
-        1. **Quoted clause** (exact text from contract)
-        2. **Why it is negotiable or problematic**
-        3. **Example strategy or counter-suggestion**
+        Focus on:
+        - **Financial Terms**: Payment schedules, pricing, penalties, bonuses
+        - **Performance Obligations**: Deliverables, timelines, quality standards
+        - **Risk Allocation**: Liability, indemnification, insurance requirements
+        - **Termination Rights**: Notice periods, exit conditions, penalties
+        - **Intellectual Property**: Ownership, licensing, confidentiality terms
+        - **Dispute Resolution**: Governing law, jurisdiction, arbitration clauses
+        
+        Structure your analysis as:
+        - **High-Priority Negotiation Points**: [Most important terms to negotiate]
+        - **Medium-Priority Points**: [Secondary negotiation opportunities]
+        - **Strategic Recommendations**: [Overall negotiation approach]
+        - **Leverage Assessment**: [Which party has more bargaining power and why]
         """),
         show_tool_calls=False
     )
